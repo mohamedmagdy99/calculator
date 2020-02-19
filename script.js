@@ -54,7 +54,7 @@ function pro(a){
 num.forEach((button)=>{
     button.addEventListener('click',(e)=>{
         butid=button.id;
-        if("*/-+.".indexOf(butid) != -1){
+        if("*/-+".indexOf(butid) != -1){
             let z;
             lastbutton=1;
             while(arr.length && pro(arr.length-1)>=pro(butid)){
@@ -81,7 +81,23 @@ num.forEach((button)=>{
             z=x.toString()+butid;
             array.push(parseInt(z));
             show.value+=butid;
-            lastbutton=0;
+        }
+        else if(".".indexOf(butid) != -1 && lastbutton==2 || lastbutton==3){
+            let z;
+            let x;
+            
+            if(lastbutton==2){
+                x=array.pop();
+                z=x.toString()+butid;
+                array.push(z);
+            }
+            else{
+                let y=array.pop();
+                z=y+butid;
+                array.push(parseFloat(z));
+            }
+            show.value+=butid;
+            lastbutton=3;
         }
         else{
             lastbutton=2;
