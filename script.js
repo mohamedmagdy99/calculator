@@ -5,6 +5,7 @@ let butid;
 let array=new Array;
 let arr=new Array;
 let ope;
+let lastbutton;
 function add(a,b){
     return a+b;
 }
@@ -55,6 +56,7 @@ num.forEach((button)=>{
         butid=button.id;
         if("*/-+.".indexOf(butid) != -1){
             let z;
+            lastbutton=1;
             while(arr.length && pro(arr.length-1)>=pro(butid)){
                 z=operate(arr.pop(),array.pop(),array.pop())
                 array.push(z);
@@ -62,7 +64,7 @@ num.forEach((button)=>{
             arr.push(butid)
             show.value+=butid;
         }
-        else if(butid=="equal"){
+        else if(butid=="equal"){ 
             while(arr.length){
                 z=operate(arr.pop(),array.pop(),array.pop())
                 array.push(z);
@@ -70,13 +72,23 @@ num.forEach((button)=>{
             show.value=array.pop();
         }
         else if(butid=="clear"){
+            lastbutton=0;
             show.value="";
         }
+        else if("1234567890".indexOf(butid) != -1 && lastbutton==2){
+            let z;
+            let x=array.pop();
+            z=x.toString()+butid;
+            array.push(parseInt(z));
+            show.value+=butid;
+            lastbutton=0;
+        }
         else{
+            lastbutton=2;
             array.push(parseInt(butid));
             show.value+=butid;
         }
-        
-        
+
+
     })
 })
